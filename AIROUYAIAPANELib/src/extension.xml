@@ -9,5 +9,8 @@
 				<initializer>com.gaslightgames.android.airouyaiapane.extensions.AIROUYAIAPANEExtension</initializer>
 			</applicationDeployment>
 		</platform>
+		<platform name="default">
+			<applicationDeployment/>
+		</platform>
 	</platforms>
 </extension>

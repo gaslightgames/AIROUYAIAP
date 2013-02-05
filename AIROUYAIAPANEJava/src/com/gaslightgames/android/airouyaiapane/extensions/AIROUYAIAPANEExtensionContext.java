@@ -33,6 +33,7 @@ public class AIROUYAIAPANEExtensionContext extends FREContext
 
 		functionMap.put( "initIAP", new AIROUYAIAPANEInit() );
 		functionMap.put( "testIAP", new AIROUYAIAPANETest() );
+		functionMap.put( "isOUYAIAPSupported", new AIROUYAIAPANESupported() );
 
 		return functionMap;
 	}
