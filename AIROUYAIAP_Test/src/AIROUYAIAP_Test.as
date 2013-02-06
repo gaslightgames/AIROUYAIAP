@@ -1,6 +1,7 @@
 package
 {
 	import com.gaslightgames.nativeExtensions.AIROUYAIAPANE.AIROUYAIAPANE;
+	import com.gaslightgames.nativeExtensions.AIROUYAIAPANE.AIROUYAIAPANEEvent;
 	
 	import flash.display.Sprite;
 	
@@ -18,9 +19,14 @@ package
 		
 		private function init():void
 		{
-			this.ouyaIap = new AIROUYAIAPANE();
-			
-			this.ouyaIap.test();
+			this.ouyaIap = new AIROUYAIAPANE( "f1c9d6d9-59f3-441d-9612-2f84fe9e9760" );
+			this.ouyaIap.addEventListener( AIROUYAIAPANEEvent.PRODUCT, onProduct );
+			this.ouyaIap.getProductInfo( "test" );
+		}
+		
+		private function onProduct( iapEvent:AIROUYAIAPANEEvent ):void
+		{
+			trace( "Product Received: " + iapEvent.product.name + ", Price: " + iapEvent.product.price );
 		}
 	}
 }

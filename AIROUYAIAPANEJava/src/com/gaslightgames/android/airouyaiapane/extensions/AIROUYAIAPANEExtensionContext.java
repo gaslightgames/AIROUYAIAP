@@ -11,6 +11,7 @@ import com.adobe.fre.FREFunction;
 public class AIROUYAIAPANEExtensionContext extends FREContext
 {
 	public OuyaFacade ouyaFacade;
+	public AIROUYAIAPANEProductListListener productListListener;
 	
 	public void notifyTest()
 	{
@@ -18,6 +19,11 @@ public class AIROUYAIAPANEExtensionContext extends FREContext
 		String eventName = "TEST_IAP";
 		
 		dispatchStatusEventAsync( eventName, "Testing IAP." );
+	}
+	
+	public void notifyProduct( String eventName, String product )
+	{
+		dispatchStatusEventAsync( eventName, product );
 	}
 	
 	@Override
@@ -34,6 +40,8 @@ public class AIROUYAIAPANEExtensionContext extends FREContext
 		functionMap.put( "initIAP", new AIROUYAIAPANEInit() );
 		functionMap.put( "testIAP", new AIROUYAIAPANETest() );
 		functionMap.put( "isOUYAIAPSupported", new AIROUYAIAPANESupported() );
+		functionMap.put( "setTestMode", new AIROUYAIAPANESetTestMode() );
+		functionMap.put( "getProdInfo", new AIROUYAIAPANEGetProdInfo() );
 
 		return functionMap;
 	}

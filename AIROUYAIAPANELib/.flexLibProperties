@@ -2,6 +2,7 @@
 <flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
   <includeClasses>
     <classEntry path="com.gaslightgames.nativeExtensions.AIROUYAIAPANE.AIROUYAIAPANE"/>
+    <classEntry path="com.gaslightgames.nativeExtensions.AIROUYAIAPANE.Product"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

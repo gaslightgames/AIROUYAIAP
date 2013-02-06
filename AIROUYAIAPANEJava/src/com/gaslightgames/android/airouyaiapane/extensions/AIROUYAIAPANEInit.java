@@ -11,7 +11,21 @@ public class AIROUYAIAPANEInit implements FREFunction
 
 	public FREObject call( FREContext context, FREObject[] passedArgs )
 	{
-		((AIROUYAIAPANEExtensionContext)context).ouyaFacade = OuyaFacade.getInstance();
+		try
+		{
+			FREObject fro = passedArgs[0];
+			String developerId = fro.getAsString();
+			
+			((AIROUYAIAPANEExtensionContext)context).ouyaFacade = OuyaFacade.getInstance();
+			
+			((AIROUYAIAPANEExtensionContext)context).productListListener = new AIROUYAIAPANEProductListListener( context );
+			
+			((AIROUYAIAPANEExtensionContext)context).ouyaFacade.init( context.getActivity(), developerId );
+		}
+		catch( Exception exception )
+		{
+			exception.printStackTrace();
+		}
 		
 		return null;
 	}
