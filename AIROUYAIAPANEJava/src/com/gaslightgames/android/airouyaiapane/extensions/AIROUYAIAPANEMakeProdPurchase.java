@@ -1,15 +1,12 @@
 package com.gaslightgames.android.airouyaiapane.extensions;
 
-import java.util.Arrays;
-import java.util.List;
-
 import tv.ouya.console.api.Purchasable;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.adobe.fre.FREObject;
 
-public class AIROUYAIAPANEGetProdInfo implements FREFunction
+public class AIROUYAIAPANEMakeProdPurchase implements FREFunction
 {
 
 	@Override
@@ -20,15 +17,15 @@ public class AIROUYAIAPANEGetProdInfo implements FREFunction
 			FREObject fro = passedArgs[0];
 			String product = fro.getAsString();
 			
-			List<Purchasable> productList = Arrays.asList( new Purchasable( product ) );
+			Purchasable productToBuy = new Purchasable( product );
 			
-			((AIROUYAIAPANEExtensionContext)context).ouyaFacade.requestProductList( productList, ((AIROUYAIAPANEExtensionContext)context).productListListener );
+			((AIROUYAIAPANEExtensionContext)context).ouyaFacade.requestPurchase( productToBuy, ((AIROUYAIAPANEExtensionContext)context).purchaseListener );
 		}
 		catch( Exception exception )
 		{
 			exception.printStackTrace();
 			
-			((AIROUYAIAPANEExtensionContext)context).notifyAIR( "PRODUCT_FAILURE", "Error getting Product," + exception.getMessage() );
+			((AIROUYAIAPANEExtensionContext)context).notifyAIR( "PURCHASE_FAILURE", "Error making Purchase," + exception.getMessage() );
 		}
 		
 		return null;

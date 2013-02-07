@@ -19,12 +19,17 @@ public class AIROUYAIAPANEInit implements FREFunction
 			((AIROUYAIAPANEExtensionContext)context).ouyaFacade = OuyaFacade.getInstance();
 			
 			((AIROUYAIAPANEExtensionContext)context).productListListener = new AIROUYAIAPANEProductListListener( context );
+			((AIROUYAIAPANEExtensionContext)context).purchaseListener = new AIROUYAIAPANEPurchaseListener( context );
+			((AIROUYAIAPANEExtensionContext)context).receiptListener = new AIROUYAIAPANEReceiptListener( context );
+			((AIROUYAIAPANEExtensionContext)context).gamerUUIDListener = new AIROUYAIAPANEGamerUUIDListener( context );
 			
 			((AIROUYAIAPANEExtensionContext)context).ouyaFacade.init( context.getActivity(), developerId );
 		}
 		catch( Exception exception )
 		{
 			exception.printStackTrace();
+			
+			((AIROUYAIAPANEExtensionContext)context).notifyAIR( "INIT_FAILED", "Initialise Failed," + exception.getMessage() );
 		}
 		
 		return null;

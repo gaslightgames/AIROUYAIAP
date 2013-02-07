@@ -39,24 +39,81 @@ package com.gaslightgames.nativeExtensions.AIROUYAIAPANE
 		
 		private function onStatus( statusEvent:StatusEvent ):void
 		{
-			//trace( statusEvent.code, statusEvent.level );
-			
 			var codeSplitStrings:Array = String( statusEvent.code ).split( "_" );
 			var levelSplitStrings:Array = String( statusEvent.level ).split( "," );
 			
 			if( "PRODUCT" == codeSplitStrings[0] )
 			{
-				// Build temp Product
-				var product:Product = new Product( levelSplitStrings[0], levelSplitStrings[1], Number( levelSplitStrings[2] ) );
-				
-				// Call Dispatch Product
-				this.dispatchProduct( codeSplitStrings[1], product );
+				this.processProduct( codeSplitStrings, levelSplitStrings );
+			}
+			if( "PURCHASE" == codeSplitStrings[0] )
+			{
+				this.processPurchase( codeSplitStrings, levelSplitStrings );
+			}
+			if( "RECEIPT" == codeSplitStrings[0] )
+			{
+				this.processReceipt( codeSplitStrings, levelSplitStrings );
+			}
+			if( "GAMERUUID" == codeSplitStrings[0] )
+			{
+				this.processGamer( codeSplitStrings, levelSplitStrings );
 			}
 		}
 		
-		private function dispatchProduct( status:String, product:Product ):void
+		private function processProduct( code:Array, level:Array ):void
 		{
-			this.dispatchEvent( new AIROUYAIAPANEEvent( AIROUYAIAPANEEvent.PRODUCT, status, product ) );
+			var product:Product = null;
+			
+			if( "SUCCESS" == code[1] )
+			{
+				// Build product with complete information
+				product = new Product( level[0], level[1], Number( level[2] ) );
+			}
+			
+			// Dispatch Product Event
+			this.dispatchEvent( new AIROUYAIAPANEEvent( AIROUYAIAPANEEvent.PRODUCT, product, code[1]) );
+		}
+		
+		private function processPurchase( code:Array, level:Array ):void
+		{
+			var purchase:Purchase = null;
+			
+			if( "SUCCESS" == code[1] )
+			{
+				// Build purchase with complete information
+				purchase = new Purchase( level[0], level[2], Number( level[1] ) );
+			}
+			
+			// Dispatch Purchase Event
+			this.dispatchEvent( new AIROUYAIAPANEEvent( AIROUYAIAPANEEvent.PURCHASE, purchase, code[1]) );
+		}
+		
+		private function processReceipt( code:Array, level:Array ):void
+		{
+			var receipt:Receipt = null;
+			
+			if( "SUCCESS" == code[1] )
+			{
+				// Build Receipt with complete information
+				receipt = new Receipt( level[0], Number( level[1] ), level[2], level[3] );
+			}
+			
+			// Dispatch Receipt Event
+			this.dispatchEvent( new AIROUYAIAPANEEvent( AIROUYAIAPANEEvent.RECEIPT, receipt, code[1]) );
+		}
+		
+		private function processGamer( code:Array, level:Array ):void
+		{
+			var gamer:Gamer = null;
+			
+			if( "SUCCESS" == code[1] )
+			{
+				// Build Gamer with complete information
+				gamer = new Gamer( level[0] );
+			}
+			
+			// Dispatch Gamer Event
+			this.dispatchEvent( new AIROUYAIAPANEEvent( AIROUYAIAPANEEvent.GAMER, gamer, code[1]) );
 		}
 		
 		public function setTestMode():void
@@ -67,6 +124,21 @@ package com.gaslightgames.nativeExtensions.AIROUYAIAPANE
 		public function getProductInfo( product:String ):void
 		{
 			extContext.call( "getProdInfo", product );
+		}
+		
+		public function makeProductPurchase( product:String ):void
+		{
+			extContext.call( "makeProdPurchase", product );
+		}
+		
+		public function getProductReceipts():void
+		{
+			extContext.call( "getProdReceipt" );
+		}
+		
+		public function getGamerUUID():void
+		{
+			extContext.call( "getGamerUUID" );
 		}
 		
 		public function test():void

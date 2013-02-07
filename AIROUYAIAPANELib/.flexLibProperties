@@ -3,6 +3,9 @@
   <includeClasses>
     <classEntry path="com.gaslightgames.nativeExtensions.AIROUYAIAPANE.AIROUYAIAPANE"/>
     <classEntry path="com.gaslightgames.nativeExtensions.AIROUYAIAPANE.Product"/>
+    <classEntry path="com.gaslightgames.nativeExtensions.AIROUYAIAPANE.Receipt"/>
+    <classEntry path="com.gaslightgames.nativeExtensions.AIROUYAIAPANE.Purchase"/>
+    <classEntry path="com.gaslightgames.nativeExtensions.AIROUYAIAPANE.Gamer"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
