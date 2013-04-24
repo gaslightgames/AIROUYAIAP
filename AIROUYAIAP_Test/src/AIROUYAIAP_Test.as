@@ -23,7 +23,8 @@ package
 		
 		private function init():void
 		{
-			this.ouyaIap = new AIROUYAIAPANE( "YOUR_OUYA_DEVELOPER_UUID" );
+			//this.ouyaIap = new AIROUYAIAPANE( "YOUR_OUYA_DEVELOPER_UUID" );
+			this.ouyaIap = AIROUYAIAPANE.getInstance( "YOUR_OUYA_DEVELOPER_UUID" );
 			this.ouyaIap.addEventListener( AIROUYAIAPANEEvent.PRODUCT, onProduct );
 			this.ouyaIap.addEventListener( AIROUYAIAPANEEvent.PURCHASE, onPurchase );
 			this.ouyaIap.addEventListener( AIROUYAIAPANEEvent.RECEIPT, onReceipt );

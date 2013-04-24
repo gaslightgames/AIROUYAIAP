@@ -7,12 +7,33 @@ package com.gaslightgames.nativeExtensions.AIROUYAIAPANE
 	
 	public class AIROUYAIAPANE extends EventDispatcher
 	{
+		public static var instance:AIROUYAIAPANE;
+		
 		private static var extContext:ExtensionContext = null;
 		
 		private static var _isSupported:Boolean = false;
 		private static var _isSupportedSet:Boolean = false;
+		private static var _developerId:String;
 		
-		public function AIROUYAIAPANE( developerId:String, target:IEventDispatcher = null )
+		public static function getInstance( developerId:String ):AIROUYAIAPANE
+		{
+			if( null == instance )
+			{
+				_developerId = developerId;
+				instance = new AIROUYAIAPANE( developerId, new SingletonEnforcer() );
+			}
+			
+			if( _developerId == developerId )
+			{
+				return instance;
+			}
+			else
+			{
+				throw new Error( "Developer ID does not match." );
+			}
+		}
+		
+		public function AIROUYAIAPANE( developerId:String, enforcer:SingletonEnforcer, target:IEventDispatcher = null )
 		{
 			trace( "Building OUYA IAP ANE" );
 			if( !extContext )
@@ -170,3 +191,5 @@ package com.gaslightgames.nativeExtensions.AIROUYAIAPANE
 		}
 	}
 }
+
+internal class SingletonEnforcer{}
