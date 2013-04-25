@@ -9,15 +9,15 @@ Notes
 ================
 
 You will need to register your App on OUYAs servers in order to be able to download a key.der file.  In the demo project, you will need to put this in your bin/ directory.
-Your package name in your Manifest.xml file might be something like this:
+<BR>Your package name in your Manifest.xml file might be something like this:
 - com.yourdomain.appname
-BUT when you register on OUYA, you MUST use a format like this:
+<BR>BUT when you register on OUYA, you MUST use a format like this:
 - air.com.yourdomain.appname
-If you don't, then you'll receive the 2005 Error that the Application UUID is invalid (Check DDMS in case you aren't getting any purchase responses in AIR Console)
+<BR>If you don't, then you'll receive the 2005 Error that the Application UUID is invalid (Check DDMS in case you aren't getting any purchase responses in AIR Console)
 
-Be careful when using the APK in the test application!  This has actual purchasing information with our developer id and application key, etc.  If you make a purchase in this application you may inadvertantly buy me a beer - as in, YOU MAY BE CHARGED!
-Instead, use the project, enter your developer ID, register your app and generate a key.der, download and add to your bin/ directory and THEN deploy/run the application.  At this point you'll be using YOUR developer credentials and wont be charged.
-YE HAVE BEEN WARRRRNED!
+<P>Be careful when using the APK in the test application!  This has actual purchasing information with our developer id and application key, etc.  If you make a purchase in this application you may inadvertantly buy me a beer - as in, YOU MAY BE CHARGED!
+<BR>Instead, use the project, enter your developer ID, register your app and generate a key.der, download and add to your bin/ directory and THEN deploy/run the application.  At this point you'll be using YOUR developer credentials and wont be charged.
+<BR>YE HAVE BEEN WARRRRNED!
 
 Folder Structure
 ================
