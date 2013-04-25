@@ -5,6 +5,20 @@ AIROUYAIAP is an unofficial Native Extension for Adobe AIR designed to expose th
 
 This Extension is in HEAVY development, is constantly being updated and modified.  It is not exactly "stable" nor ready for commercial use.  Use with caution and be aware of problems, changes etc!
 
+Notes
+================
+
+You will need to register your App on OUYAs servers in order to be able to download a key.der file.  In the demo project, you will need to put this in your bin/ directory.
+Your package name in your Manifest.xml file might be something like this:
+- com.yourdomain.appname
+BUT when you register on OUYA, you MUST use a format like this:
+- air.com.yourdomain.appname
+If you don't, then you'll receive the 2005 Error that the Application UUID is invalid (Check DDMS in case you aren't getting any purchase responses in AIR Console)
+
+Be careful when using the APK in the test application!  This has actual purchasing information with our developer id and application key, etc.  If you make a purchase in this application you may inadvertantly buy me a beer - as in, YOU MAY BE CHARGED!
+Instead, use the project, enter your developer ID, register your app and generate a key.der, download and add to your bin/ directory and THEN deploy/run the application.  At this point you'll be using YOUR developer credentials and wont be charged.
+YE HAVE BEEN WARRRRNED!
+
 Folder Structure
 ================
 
@@ -20,17 +34,23 @@ There are 4 folders within the project:
 
 Current Progress
 ================
-
-<BR>Initialization works (Using Developers UUID)
+<BR>Update to ODK 1.0.3 (In progress...)
+<BR>Initialization works (Using Developers UUID and Application Key)
 <BR>Requests Product Info
-<BR>Requests Receipts
+<BR>Requests Receipts (Broken! Currently updating)
 <BR>Requests Gamer UUID (NB: These are unique for each gamer, on each game - even if the game is by the same developer!)
-<BR>Make a Purchase Request
-<BR>Put the Purchase into Test Mode
+<BR>Make a Purchase Request (Working with new ODK)
+<BR>Put the Purchase into Test Mode (Deprecated - but there looks to be a new method, in progress...)
 
 To-Do
 =====
 
+* Update to ODK 1.0.3 [IN PROGRESS]
+* Send Application Key [DONE]
+* Support Encrypted Purchase Requests [DONE]
+* Support Encrypted Purchase Responses [DONE]
+* Support Encrypted Receipt Requests [IN PROGRESS]
+* Support Encrypted Receipt Responses [IN PROGRESS]
 * Build ANE Projects (Java; AS3 Library; Demo Project) [DONE]
 * Include OUYA Library (ODK) [DONE]
 * Exctract .class files from ODK and embed into ANE (at JAR level) [DONE]
@@ -45,4 +65,9 @@ To-Do
 * Pass results to AS3 [DONE]
 * Parse results from Java into usable AS3 classes [DONE]
 * Create and issue events in AS3 [DONE]
-* Support encrypted receipts [TBC]
+
+License
+================
+
+The code, packages and anything in this project are provided "as is".  You are free to do what you like, modify, update etc - if you like, send a pull/push request if you have any fixes or suggestions.
+And if in doubt, follow Whetons Law: http://knowyourmeme.com/memes/wheatons-law

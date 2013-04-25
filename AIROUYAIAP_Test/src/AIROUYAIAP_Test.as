@@ -8,6 +8,12 @@ package
 	import com.gaslightgames.nativeExtensions.AIROUYAIAPANE.Receipt;
 	
 	import flash.display.Sprite;
+	import flash.events.Event;
+	import flash.net.URLLoader;
+	import flash.net.URLLoaderDataFormat;
+	import flash.net.URLRequest;
+	import flash.utils.ByteArray;
+	import flash.utils.Endian;
 	
 	[SWF(backgroundColor="#FF0000", frameRate="60", width="1920", height="1080")]
 	public class AIROUYAIAP_Test extends Sprite
@@ -23,16 +29,31 @@ package
 		
 		private function init():void
 		{
-			//this.ouyaIap = new AIROUYAIAPANE( "YOUR_OUYA_DEVELOPER_UUID" );
-			this.ouyaIap = AIROUYAIAPANE.getInstance( "YOUR_OUYA_DEVELOPER_UUID" );
+			var urlRequest:URLRequest = new URLRequest( "key.der" );	// Needs to be in your bin directory!
+			var urlLoader:URLLoader = new URLLoader();
+			urlLoader.addEventListener( Event.COMPLETE, onKeyLoad );
+			urlLoader.dataFormat = URLLoaderDataFormat.BINARY;
+			urlLoader.load( urlRequest );
+		}
+		
+		private function onKeyLoad( event:Event ):void
+		{
+			( event.target as URLLoader ).removeEventListener( Event.COMPLETE, onKeyLoad );
+			
+			// Get the Key data - as a ByteArray so we can pass it to the ANE
+			var key:ByteArray = ( event.target as URLLoader ).data as ByteArray;
+			key.endian = Endian.LITTLE_ENDIAN;
+			
+			// Simple way to read the values and make sure your key matches.
+			this.checkKey( key );
+			
+			this.ouyaIap = AIROUYAIAPANE.getInstance( "YOUR_OUYA_DEVELOPER_UUID", key );
 			this.ouyaIap.addEventListener( AIROUYAIAPANEEvent.PRODUCT, onProduct );
 			this.ouyaIap.addEventListener( AIROUYAIAPANEEvent.PURCHASE, onPurchase );
 			this.ouyaIap.addEventListener( AIROUYAIAPANEEvent.RECEIPT, onReceipt );
 			this.ouyaIap.addEventListener( AIROUYAIAPANEEvent.GAMER, onGamer );
-			this.ouyaIap.setTestMode();
-			this.ouyaIap.getProductInfo( "test" );
-			this.ouyaIap.makeProductPurchase( "test" );
-			this.ouyaIap.getProductReceipts();
+			this.ouyaIap.getProductInfo( "test" );									// You will need a product on OUYAs server!
+			//this.ouyaIap.getProductReceipts();									// Not yet updated to new ODK
 			this.ouyaIap.getGamerUUID();
 		}
 		
@@ -42,6 +63,8 @@ package
 			if( null != product )
 			{
 				trace( "Product Received: " + product.identifier + ", " + product.name + ", " + product.price );
+				
+				this.ouyaIap.makeProductPurchase( product );
 			}
 		}
 		
@@ -72,6 +95,18 @@ package
 			{
 				trace( "Gamer UUID Received: " + gamer.udid );
 			}
+		}
+		
+		private function checkKey( key:ByteArray ):void
+		{
+			key.position = 0;
+			var keyStr:String = "";
+			while( key.bytesAvailable )
+			{
+				var byte:uint = key.readUnsignedByte();
+				keyStr += byte.toString(16).substr(-2);
+			}
+			trace( "Key: " + keyStr );
 		}
 	}
 }

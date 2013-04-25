@@ -4,6 +4,7 @@ package com.gaslightgames.nativeExtensions.AIROUYAIAPANE
 	import flash.events.IEventDispatcher;
 	import flash.events.StatusEvent;
 	import flash.external.ExtensionContext;
+	import flash.utils.ByteArray;
 	
 	public class AIROUYAIAPANE extends EventDispatcher
 	{
@@ -15,12 +16,23 @@ package com.gaslightgames.nativeExtensions.AIROUYAIAPANE
 		private static var _isSupportedSet:Boolean = false;
 		private static var _developerId:String;
 		
-		public static function getInstance( developerId:String ):AIROUYAIAPANE
+		/**
+		 * On the first call - make sure to pass BOTH developerId AND applicationKey.
+		 * <BR>On subsequent calls, you don't need the Application Key.
+		 */
+		public static function getInstance( developerId:String, applicationKey:ByteArray = null ):AIROUYAIAPANE
 		{
 			if( null == instance )
 			{
-				_developerId = developerId;
-				instance = new AIROUYAIAPANE( developerId, new SingletonEnforcer() );
+				if( null != applicationKey )
+				{
+					_developerId = developerId;
+					instance = new AIROUYAIAPANE( developerId, applicationKey, new SingletonEnforcer() );
+				}
+				else
+				{
+					throw new Error( "Application Key Required on First Call!" );
+				}
 			}
 			
 			if( _developerId == developerId )
@@ -33,7 +45,7 @@ package com.gaslightgames.nativeExtensions.AIROUYAIAPANE
 			}
 		}
 		
-		public function AIROUYAIAPANE( developerId:String, enforcer:SingletonEnforcer, target:IEventDispatcher = null )
+		public function AIROUYAIAPANE( developerId:String, applicationKey:ByteArray, enforcer:SingletonEnforcer, target:IEventDispatcher = null )
 		{
 			trace( "Building OUYA IAP ANE" );
 			if( !extContext )
@@ -41,7 +53,7 @@ package com.gaslightgames.nativeExtensions.AIROUYAIAPANE
 				trace( "Building Extension Context" );
 				extContext = ExtensionContext.createExtensionContext( "com.gaslightgames.AIROUYAIAPANE", "AIROUYAIAPANE" );
 				
-				extContext.call( "initIAP", developerId );
+				extContext.call( "initIAP", developerId, applicationKey );
 				
 				if( extContext )
 				{
@@ -137,19 +149,14 @@ package com.gaslightgames.nativeExtensions.AIROUYAIAPANE
 			this.dispatchEvent( new AIROUYAIAPANEEvent( AIROUYAIAPANEEvent.GAMER, gamer, code[1]) );
 		}
 		
-		public function setTestMode():void
-		{
-			extContext.call( "setTestMode" );
-		}
-		
 		public function getProductInfo( product:String ):void
 		{
 			extContext.call( "getProdInfo", product );
 		}
 		
-		public function makeProductPurchase( product:String ):void
+		public function makeProductPurchase( product:Product ):void
 		{
-			extContext.call( "makeProdPurchase", product );
+			extContext.call( "makeProdPurchase", product.identifier, product.name, product.price );
 		}
 		
 		public function getProductReceipts():void

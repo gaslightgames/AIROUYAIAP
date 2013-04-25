@@ -1,10 +1,11 @@
 package com.gaslightgames.nativeExtensions.AIROUYAIAPANE
 {
 	import flash.events.IEventDispatcher;
+	import flash.utils.ByteArray;
 
 	public class AIROUYAIAPANE
 	{
-		public function AIROUYAIAPANE( developerId:String, target:IEventDispatcher = null )
+		public function AIROUYAIAPANE( developerId:String, applicationKey:ByteArray, target:IEventDispatcher = null )
 		{
 			trace( "Not supported on this platform!" );
 		}

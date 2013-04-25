@@ -15,7 +15,7 @@
 
 	<!-- A universally unique application identifier. Must be unique across all AIR applications.
 	Using a reverse DNS-style name as the id is recommended. (Eg. com.example.ExampleApplication.) Required. -->
-	<id>AIROUYAIAP.Test.debug</id>
+	<id>com.gaslightgames.test</id>
 
 	<!-- Used as the filename for the application. Required. -->
 	<filename>AIROUYAIAP_Test</filename>
@@ -264,6 +264,16 @@
 		together in order to use AIR's NetworkInfo APIs-->
 			    <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>-->
 			    <!--<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>-->
+			    
+			    <application>
+			    	<activity>
+			    		<intent-filter>
+			    			<action android:name="android.intent.action.MAIN" />
+			    			<category android:name="android.intent.category.LAUNCHER" />
+			    			<category android:name="tv.ouya.intent.category.GAME" />
+			    		</intent-filter>
+			    	</activity>
+			    </application>
 			</manifest>
 			
 		]]></manifestAdditions>

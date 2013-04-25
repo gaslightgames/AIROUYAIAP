@@ -1,9 +1,11 @@
 package com.gaslightgames.android.airouyaiapane.extensions;
 
+import java.security.PublicKey;
 import java.util.HashMap;
 import java.util.Map;
 
 import tv.ouya.console.api.OuyaFacade;
+import tv.ouya.console.api.Product;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
@@ -11,6 +13,8 @@ import com.adobe.fre.FREFunction;
 public class AIROUYAIAPANEExtensionContext extends FREContext
 {
 	public OuyaFacade ouyaFacade;
+	public PublicKey publicKey;
+	public final Map<String, Product> outstandingPurchaseRequests = new HashMap<String, Product>();
 	public AIROUYAIAPANEProductListListener productListListener;
 	public AIROUYAIAPANEPurchaseListener	purchaseListener;
 	public AIROUYAIAPANEReceiptListener		receiptListener;
@@ -64,7 +68,6 @@ public class AIROUYAIAPANEExtensionContext extends FREContext
 		functionMap.put( "initIAP", new AIROUYAIAPANEInit() );
 		functionMap.put( "testIAP", new AIROUYAIAPANETest() );
 		functionMap.put( "isOUYAIAPSupported", new AIROUYAIAPANESupported() );
-		functionMap.put( "setTestMode", new AIROUYAIAPANESetTestMode() );
 		functionMap.put( "getProdInfo", new AIROUYAIAPANEGetProdInfo() );
 		functionMap.put( "makeProdPurchase", new AIROUYAIAPANEMakeProdPurchase() );
 		functionMap.put( "getProdReceipt", new AIROUYAIAPANEGetProdReceipt() );
