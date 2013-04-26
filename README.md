@@ -45,6 +45,7 @@ Current Progress
 To-Do
 =====
 
+* Update external class files added to JAR, to avoid collisions with Controller ANE [DONE]
 * Add "Testing" Boolean (Affects new way of signalling testing in ODK)
 * Update to ODK 1.0.3 [DONE]
 * Send Application Key [DONE]
