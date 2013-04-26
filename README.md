@@ -34,37 +34,38 @@ There are 4 folders within the project:
 
 Current Progress
 ================
-<BR>Update to ODK 1.0.3 (In progress...)
+<BR>Update to ODK 1.0.3 (Complete!)
 <BR>Initialization works (Using Developers UUID and Application Key)
 <BR>Requests Product Info
 <BR>Requests Receipts (Broken! Currently updating)
 <BR>Requests Gamer UUID (NB: These are unique for each gamer, on each game - even if the game is by the same developer!)
 <BR>Make a Purchase Request (Working with new ODK)
-<BR>Put the Purchase into Test Mode (Deprecated - but there looks to be a new method, in progress...)
+<BR>Put the Purchase into Test Mode (Use new method - send boolean in first call to getInstance)
 
 To-Do
 =====
 
-* Update to ODK 1.0.3 [IN PROGRESS]
+* Add "Testing" Boolean (Affects new way of signalling testing in ODK)
+* Update to ODK 1.0.3 [DONE]
 * Send Application Key [DONE]
 * Support Encrypted Purchase Requests [DONE]
 * Support Encrypted Purchase Responses [DONE]
-* Support Encrypted Receipt Requests [IN PROGRESS]
-* Support Encrypted Receipt Responses [IN PROGRESS]
-* Build ANE Projects (Java; AS3 Library; Demo Project) [DONE]
-* Include OUYA Library (ODK) [DONE]
-* Exctract .class files from ODK and embed into ANE (at JAR level) [DONE]
-* Send initialize details (Developer UUID) from AS3 to Java [DONE]
-* Attempt initialization with OUYA Servers (in Java) [DONE]
+* Support Encrypted Receipt Requests [DONE]
+* Support Encrypted Receipt Responses [DONE]
+* Create and issue events in AS3 [DONE]
+* Parse results from Java into usable AS3 classes [DONE]
+* Pass results to AS3 [DONE]
+* Parse results in Java [DONE]
 * Creates classes for and Initialize:
 ** Product Request Listener [DONE]
 ** Receipt Request Listener (Currently only supports the JSON receipt parser, as Encrypted receipts are not yet available) [DONE]
 ** Gamer UUID Request Listener [DONE]
 ** Make Purchase Request Listener [DONE]
-* Parse results in Java [DONE]
-* Pass results to AS3 [DONE]
-* Parse results from Java into usable AS3 classes [DONE]
-* Create and issue events in AS3 [DONE]
+* Attempt initialization with OUYA Servers (in Java) [DONE]
+* Send initialize details (Developer UUID) from AS3 to Java [DONE]
+* Exctract .class files from ODK and embed into ANE (at JAR level) [DONE]
+* Include OUYA Library (ODK) [DONE]
+* Build ANE Projects (Java; AS3 Library; Demo Project) [DONE]
 
 License
 ================

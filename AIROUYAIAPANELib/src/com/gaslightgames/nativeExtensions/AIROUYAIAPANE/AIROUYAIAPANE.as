@@ -19,15 +19,16 @@ package com.gaslightgames.nativeExtensions.AIROUYAIAPANE
 		/**
 		 * On the first call - make sure to pass BOTH developerId AND applicationKey.
 		 * <BR>On subsequent calls, you don't need the Application Key.
+		 * <BR>The testing Boolean affects the new change in ODK 1.0.3 and allows testing of purchases.
 		 */
-		public static function getInstance( developerId:String, applicationKey:ByteArray = null ):AIROUYAIAPANE
+		public static function getInstance( developerId:String, applicationKey:ByteArray = null, testing:Boolean = true ):AIROUYAIAPANE
 		{
 			if( null == instance )
 			{
 				if( null != applicationKey )
 				{
 					_developerId = developerId;
-					instance = new AIROUYAIAPANE( developerId, applicationKey, new SingletonEnforcer() );
+					instance = new AIROUYAIAPANE( developerId, applicationKey, testing, new SingletonEnforcer() );
 				}
 				else
 				{
@@ -45,7 +46,7 @@ package com.gaslightgames.nativeExtensions.AIROUYAIAPANE
 			}
 		}
 		
-		public function AIROUYAIAPANE( developerId:String, applicationKey:ByteArray, enforcer:SingletonEnforcer, target:IEventDispatcher = null )
+		public function AIROUYAIAPANE( developerId:String, applicationKey:ByteArray, testing:Boolean, enforcer:SingletonEnforcer, target:IEventDispatcher = null )
 		{
 			trace( "Building OUYA IAP ANE" );
 			if( !extContext )
@@ -53,7 +54,7 @@ package com.gaslightgames.nativeExtensions.AIROUYAIAPANE
 				trace( "Building Extension Context" );
 				extContext = ExtensionContext.createExtensionContext( "com.gaslightgames.AIROUYAIAPANE", "AIROUYAIAPANE" );
 				
-				extContext.call( "initIAP", developerId, applicationKey );
+				extContext.call( "initIAP", developerId, applicationKey, testing );
 				
 				if( extContext )
 				{

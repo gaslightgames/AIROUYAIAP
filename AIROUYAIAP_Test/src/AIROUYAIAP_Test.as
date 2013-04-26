@@ -47,13 +47,12 @@ package
 			// Simple way to read the values and make sure your key matches.
 			this.checkKey( key );
 			
-			this.ouyaIap = AIROUYAIAPANE.getInstance( "YOUR_OUYA_DEVELOPER_UUID", key );
+			this.ouyaIap = AIROUYAIAPANE.getInstance( "YOUR_OUYA_DEVELOPER_UUID", key, true );
 			this.ouyaIap.addEventListener( AIROUYAIAPANEEvent.PRODUCT, onProduct );
 			this.ouyaIap.addEventListener( AIROUYAIAPANEEvent.PURCHASE, onPurchase );
 			this.ouyaIap.addEventListener( AIROUYAIAPANEEvent.RECEIPT, onReceipt );
 			this.ouyaIap.addEventListener( AIROUYAIAPANEEvent.GAMER, onGamer );
-			this.ouyaIap.getProductInfo( "test" );									// You will need a product on OUYAs server!
-			//this.ouyaIap.getProductReceipts();									// Not yet updated to new ODK
+			this.ouyaIap.getProductInfo( "test_entitlement" );						// You will need a product on OUYAs server! Not yet updated to new ODK
 			this.ouyaIap.getGamerUUID();
 		}
 		
@@ -74,6 +73,8 @@ package
 			if( null != purchase )
 			{
 				trace( "Purchase Made: " + purchase.identifier + ", " + purchase.name + ", " + purchase.price );
+				
+				this.ouyaIap.getProductReceipts();									// This call only works on ENTITLEMENTS!  Make sure you've bought one first to see a receipt.
 			}
 		}
 		

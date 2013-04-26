@@ -6,8 +6,6 @@ import java.security.spec.X509EncodedKeySpec;
 
 import tv.ouya.console.api.OuyaFacade;
 
-import android.util.Log;
-
 import com.adobe.fre.FREByteArray;
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
@@ -22,6 +20,8 @@ public class AIROUYAIAPANEInit implements FREFunction
 		{
 			FREObject fro = passedArgs[0];
 			String developerId = fro.getAsString();
+			fro = passedArgs[2];
+			Boolean testing = fro.getAsBool();
 			
 			FREByteArray byteArray = (FREByteArray)passedArgs[1];
 			byteArray.acquire();
@@ -58,7 +58,7 @@ public class AIROUYAIAPANEInit implements FREFunction
 			((AIROUYAIAPANEExtensionContext)context).publicKey = keyFactory.generatePublic( keySpec );
 			
 			((AIROUYAIAPANEExtensionContext)context).ouyaFacade = OuyaFacade.getInstance();
-			
+			((AIROUYAIAPANEExtensionContext)context).testing = testing;
 			((AIROUYAIAPANEExtensionContext)context).productListListener = new AIROUYAIAPANEProductListListener( context );
 			((AIROUYAIAPANEExtensionContext)context).receiptListener = new AIROUYAIAPANEReceiptListener( context );
 			((AIROUYAIAPANEExtensionContext)context).gamerUUIDListener = new AIROUYAIAPANEGamerUUIDListener( context );

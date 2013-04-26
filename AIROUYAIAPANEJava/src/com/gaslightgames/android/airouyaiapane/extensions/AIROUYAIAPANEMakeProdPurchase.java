@@ -46,8 +46,7 @@ public class AIROUYAIAPANEMakeProdPurchase implements FREFunction
 			JSONObject purchaseRequestJson = new JSONObject();
 			purchaseRequestJson.put( "uuid", uniqueId );
 			purchaseRequestJson.put( "identifier", identifier );
-			purchaseRequestJson.put( "testing", true );			// *** RE-ADD OUR "TESTING" METHOD AND SET A PUBLIC BOOLEAN FLAG
-																//	   CHANGE THE true TO THIS PUBLIC FLAG (FROM CONTEXT) ***
+			purchaseRequestJson.put( "testing", ((AIROUYAIAPANEExtensionContext)context).testing );
 			
 			String purchaseRequest = purchaseRequestJson.toString();
 			

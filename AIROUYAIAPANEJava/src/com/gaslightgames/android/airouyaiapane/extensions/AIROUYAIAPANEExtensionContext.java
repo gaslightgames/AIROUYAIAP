@@ -14,6 +14,7 @@ public class AIROUYAIAPANEExtensionContext extends FREContext
 {
 	public OuyaFacade ouyaFacade;
 	public PublicKey publicKey;
+	public Boolean testing;
 	public final Map<String, Product> outstandingPurchaseRequests = new HashMap<String, Product>();
 	public AIROUYAIAPANEProductListListener productListListener;
 	public AIROUYAIAPANEPurchaseListener	purchaseListener;

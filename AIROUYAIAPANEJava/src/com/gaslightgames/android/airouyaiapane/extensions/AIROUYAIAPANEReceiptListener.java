@@ -1,7 +1,8 @@
 package com.gaslightgames.android.airouyaiapane.extensions;
 
-import java.io.IOException;
 import java.util.List;
+
+import org.json.JSONObject;
 
 import com.adobe.fre.FREContext;
 
@@ -39,35 +40,29 @@ public class AIROUYAIAPANEReceiptListener implements OuyaResponseListener<String
 		
 		try
 		{
-			//receipts = helper.decryptReceiptResponse( receiptResponse, null );
-			receipts = helper.parseJSONReceiptResponse( receiptResponse );
+			JSONObject jsonResponse = new JSONObject( receiptResponse );
 			
-			if( receipts.isEmpty() )
+			if( jsonResponse.has( "key" ) && jsonResponse.has( "iv" ) )
 			{
-				((AIROUYAIAPANEExtensionContext)context).notifyAIR( "RECEIPT_SUCCESS", "" );
+				receipts = helper.decryptReceiptResponse( jsonResponse, ((AIROUYAIAPANEExtensionContext)context).publicKey );
 			}
 			else
 			{
-				for( Receipt r : receipts )
-				{
-					String receipt = r.getIdentifier() + "," + r.getPriceInCents() + "," + r.getGeneratedDate() + "," + r.getPurchaseDate();
-					
-					((AIROUYAIAPANEExtensionContext)context).notifyAIR( "RECEIPT_SUCCESS", receipt );
-				}
+				receipts = helper.parseJSONReceiptResponse( receiptResponse );
 			}
 		}
-		catch( IOException ioException )
+		catch( Exception exception )
 		{
-			((AIROUYAIAPANEExtensionContext)context).notifyAIR( "RECEIPT_FAILURE", ioException.getMessage() );
+			((AIROUYAIAPANEExtensionContext)context).notifyAIR( "RECEIPT_FAILURE", exception.getMessage() );
 			
-			throw new RuntimeException( ioException );
+			throw new RuntimeException( exception );
 		}
-		/*catch ( GeneralSecurityException generalSecurityException )
+		
+		for( Receipt r : receipts )
 		{
-			generalSecurityException.printStackTrace();
+			String receipt = r.getIdentifier() + "," + r.getPriceInCents() + "," + r.getGeneratedDate() + "," + r.getPurchaseDate();
 			
-			((AIROUYAIAPANEExtensionContext)context).notifyAIR( "RECEIPT_FAILURE", generalSecurityException.getMessage() );
-		}*/
+			((AIROUYAIAPANEExtensionContext)context).notifyAIR( "RECEIPT_SUCCESS", receipt );
+		}
 	}
-
 }
