@@ -3,7 +3,7 @@ AIROUYAIAP
 
 AIROUYAIAP is an unofficial Native Extension for Adobe AIR designed to expose the functionalities of the OUYA IAP (In-App Purchases) to ActionScript 3.
 
-This Extension is in HEAVY development, is constantly being updated and modified.  It is not exactly "stable" nor ready for commercial use.  Use with caution and be aware of problems, changes etc!
+Updated to ODK 1.0.5 and currently being used in several OUYA titles!
 
 Notes
 ================
@@ -34,6 +34,7 @@ There are 4 folders within the project:
 
 Current Progress
 ================
+<BR<Update to ODK 1.0.5 (Complete!)
 <BR>Update to ODK 1.0.3 (Complete!)
 <BR>Initialization works (Using Developers UUID and Application Key)
 <BR>Requests Product Info

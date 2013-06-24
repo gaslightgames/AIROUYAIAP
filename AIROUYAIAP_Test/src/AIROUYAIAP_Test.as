@@ -47,7 +47,7 @@ package
 			// Simple way to read the values and make sure your key matches.
 			this.checkKey( key );
 			
-			this.ouyaIap = AIROUYAIAPANE.getInstance( "YOUR_OUYA_DEVELOPER_UUID", key, true );
+			this.ouyaIap = AIROUYAIAPANE.getInstance( "YOUR_DEVELOPER_KEY_HERE", key, true );
 			this.ouyaIap.addEventListener( AIROUYAIAPANEEvent.PRODUCT, onProduct );
 			this.ouyaIap.addEventListener( AIROUYAIAPANEEvent.PURCHASE, onPurchase );
 			this.ouyaIap.addEventListener( AIROUYAIAPANEEvent.RECEIPT, onReceipt );
