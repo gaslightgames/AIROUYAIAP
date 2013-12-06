@@ -1,6 +1,8 @@
 AIROUYAIAP
 =================
 
+DEPRECATED!  Use the Facade Extension instead: https://github.com/gaslightgames/AIROUYAFacade
+
 AIROUYAIAP is an unofficial Native Extension for Adobe AIR designed to expose the functionalities of the OUYA IAP (In-App Purchases) to ActionScript 3.
 
 Updated to ODK 1.0.5 and currently being used in several OUYA titles!
